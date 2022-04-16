@@ -135,8 +135,8 @@ def ping(host, timeout=1):
     else:
         vars = ['0', '0.0', '0', '0.0']
 
-    print(f"round-trip min/avg/max/stddev = {vars[0]}/{vars[1]}/{vars[2]}/{vars[3]} ms")
-    print(vars)
+    #print(f"round-trip min/avg/max/stddev = {vars[0]}/{vars[1]}/{vars[2]}/{vars[3]} ms")
+    #print(vars)
     return vars
 
 
