@@ -59,7 +59,7 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
             timeSent = struct.unpack("d", recPacket[28:28 + bytesInDouble])[0]
             ttls = struct.unpack("c", recPacket[8:9])[0]
             rtt = timeReceived - timeSent
-            print(f"Reply from {destAddr}: bytes={len(icmpHeader)} time={round(rtt * 1000, 2)}ms TTL={timeLeft}")
+            print(f"Reply from {destAddr}: bytes={bytesInDouble} time={round(rtt * 1000, 2)}ms TTL={timeout}")
             return rtt, ttls
 
         # Fill in end
@@ -130,12 +130,13 @@ def ping(host, timeout=1):
         packet_min = min(delayCounter) * 1000
         packet_avg = sum(delayCounter) / len(delayCounter) * 1000
         packet_max = max(delayCounter) * 1000
-        stdev_var = list(delayCounter) * 1000
-        vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(statistics.stdev(stdev_var), 2))]
+        stddev_var = list(delayCounter) * 1000
+        vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(statistics.stdev(stddev_var), 2))]
     else:
         vars = ['0', '0.0', '0', '0.0']
 
     print(f"round-trip min/avg/max/stddev = {vars[0]}/{vars[1]}/{vars[2]}/{vars[3]} ms")
+    print(vars)
     return vars
 
 
